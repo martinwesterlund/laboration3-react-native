@@ -5,18 +5,23 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen'
 import BrightnessComp from './screens/BrightnessComp'
 import DistComponent from './screens/DistComponent'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createStackNavigator();
+
+const Tab = createBottomTabNavigator()
 
 function App() {
   return (
    
       <NavigationContainer >
-        <Stack.Navigator>
-          {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-          <Stack.Screen style={styles.container} name="Brightness fun" component={BrightnessComp} />
-          {/* <Stack.Screen name="Distance calculator" component={DistComponent} /> */}
-        </Stack.Navigator>
+        <Tab.Navigator>
+        
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen style={styles.container} name="Brightness fun" component={BrightnessComp} />
+          <Stack.Screen name="Distance calculator" component={DistComponent} />
+        
+        </Tab.Navigator>
       </NavigationContainer>
     
   );
