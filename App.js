@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen'
@@ -15,6 +15,7 @@ function App() {
   return (
    
       <NavigationContainer >
+      <StatusBar backgroundColor='#e1a400' barStyle='dark-content' hidden={true}></StatusBar>
         <Tab.Navigator>
         
           <Stack.Screen name="Home" component={HomeScreen} />
