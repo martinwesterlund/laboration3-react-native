@@ -25,11 +25,7 @@ function BrightnessComp() {
 
   return (
     <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
+      style={styles.container}>
       <Button color='green' title='Get lower brightness' onPress={() => lowerBrightness()}></Button>
       <Button title='Get higher brightness' onPress={() => higherBrightness()}></Button>
     </View>
@@ -38,6 +34,12 @@ function BrightnessComp() {
 
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#e1a400'
+    },  
   btn: {
       color: 'green'
   },

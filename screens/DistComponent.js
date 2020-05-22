@@ -70,7 +70,7 @@ fetch(`https://geocode.xyz/${myCoords.latitude},${myCoords.longitude}?geoit=json
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Calculate distance to other destination</Text>
-            {myLocation && <Text style={styles.textSmall}>Your location: {myLocation.address} {myLocation.stnumber}, {myLocation.city}, {myLocation.country}</Text>}
+            {myLocation ? <Text style={styles.textSmall}>Your location: {myLocation.address} {myLocation.stnumber}, {myLocation.city}, {myLocation.country}</Text> : <Text style={styles.textSmall}>Getting location...</Text>}
             <TextInput style={styles.input} placeholder='Add destination...' placeholderTextColor={'blue'} onChangeText={onChange} />
             <Button title='Get distance!' onPress={() => getDestinationCoords(query)} />
             {distance && destinationCoords && <Text style={styles.textSmall}>Distance to {destination}: {distance} km</Text>}
@@ -84,8 +84,10 @@ fetch(`https://geocode.xyz/${myCoords.latitude},${myCoords.longitude}?geoit=json
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
-    },
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#e1a400'
+    }, 
     input: {
         height: 60,
         width: 300,
@@ -99,14 +101,14 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: 'darkblue',
+        color: '#390087',
         fontSize: 24,
         textAlign: 'center',
         margin: 20,
         fontWeight: 'bold'
     },
     textSmall: {
-        color: 'darkblue',
+        color: '#390087',
         fontSize: 18,
         textAlign: 'center',
         margin: 20,
