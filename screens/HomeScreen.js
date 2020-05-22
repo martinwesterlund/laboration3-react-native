@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet} from 'react-native';
 
 function HomeScreen() {
     return (
         <View style={styles.container}>
-            <Text>Home Screen</Text>
+            <Text>This is a useless app</Text>
         </View>
     )
 }
@@ -15,10 +15,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#e1a400'
-    },  
-  btn: {
-      color: 'green'
-  },
+    },
 })
 
 export default HomeScreen

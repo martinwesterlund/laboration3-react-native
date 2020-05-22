@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Platform, Text, View, Button, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, Button, StyleSheet, TextInput, Vibration } from 'react-native';
 import { getPreciseDistance } from 'geolib';
 import * as Location from 'expo-location';
 
@@ -7,14 +7,10 @@ const DistComponent = () => {
     const [myCoords, setMyCoords] = useState({ longitude: null, latitude: null })
     const [myLocation, setMyLocation] = useState(null)
     const [errorMsg, setErrorMsg] = useState(null)
-
     const [destinationCoords, setDestinationCoords] = useState()
-
     const [distance, setDistance] = useState(null)
-
     const [query, setQuery] = useState()
     const [destination, setDestination] = useState()
-
     const onChange = textValue => setQuery(textValue)
 
     useEffect(() => {
@@ -28,10 +24,8 @@ const DistComponent = () => {
             if (errorMsg) {
                 text = errorMsg;
             } else if (location) {
-                console.log(location)
                 setMyCoords({ latitude: location.coords.latitude, longitude: location.coords.longitude })
             }
-
         })();
     }, [])
 
@@ -42,21 +36,21 @@ const DistComponent = () => {
                 destinationCoords
             )
             setDistance(pdis / 1000)
+            Vibration.vibrate()
         }
 
     }, [destinationCoords])
 
     useEffect(() => {
-        if(myCoords){
-fetch(`https://geocode.xyz/${myCoords.latitude},${myCoords.longitude}?geoit=json`)
-            .then(response => response.json())
-            .then(result => {
-                setMyLocation({ city: result.city, address: result.staddress, stnumber: result.stnumber, country: result.country })
-            })
+        if (myCoords) {
+            fetch(`https://geocode.xyz/${myCoords.latitude},${myCoords.longitude}?geoit=json`)
+                .then(response => response.json())
+                .then(result => {
+                    setMyLocation({ city: result.city, address: result.staddress, stnumber: result.stnumber, country: result.country })
+                })
         }
-        
-    }, [myCoords])
 
+    }, [myCoords])
 
     function getDestinationCoords(query) {
         fetch(`https://geocode.xyz/${query}?json=1`)
@@ -76,9 +70,6 @@ fetch(`https://geocode.xyz/${myCoords.latitude},${myCoords.longitude}?geoit=json
             {distance && destinationCoords && <Text style={styles.textSmall}>Distance to {destination}: {distance} km</Text>}
         </View>
     )
-
-
-
 }
 
 const styles = StyleSheet.create({
@@ -87,7 +78,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#e1a400'
-    }, 
+    },
     input: {
         height: 60,
         width: 300,
